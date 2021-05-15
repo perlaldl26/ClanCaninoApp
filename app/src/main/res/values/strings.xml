@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ClanCanino</string>
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="registrar">O registrar</string>
+</resources>
