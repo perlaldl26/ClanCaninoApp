@@ -2,6 +2,7 @@ package mx.itson.clancanino;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -79,5 +80,9 @@ public class Registro extends AppCompatActivity {
             }
 
         }
+    }
+
+    public void inicio(View view) {
+        finish();
     }
 }

@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">ClanCanino</string>
-    <string name="user">Usuario</string>
+    <string name="user">Email</string>
+    <string name="nombre">Nombre</string>
     <string name="password">Contraseña</string>
+    <string name="password2">Repita su contraseña</string>
     <string name="ingresar">Ingresar</string>
     <string name="registrar">O registrar</string>
+    <string name="loguearse">O inicia sesión</string>
     <string name="registrarUsuario">Registrarse</string>
 </resources>

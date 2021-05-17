@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import mx.itson.clancanino.Entidades.Sesion;
 import mx.itson.clancanino.utilerias.RetrofitUtil;
 import okhttp3.MediaType;
@@ -22,6 +23,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
     }
@@ -58,13 +60,15 @@ public class Login extends AppCompatActivity {
     }
 
     public void iniciarSesion(View view) {
+
+
         TextView txtEmail = (TextView)findViewById(R.id.editTextUser);
         String email = txtEmail.getText().toString().trim();
         TextView txtPassword = (TextView)findViewById(R.id.editTextPassword);
         String password = txtPassword.getText().toString().trim();
 
         if(email.equals("") || password.equals("")){
-            Toast.makeText(getApplicationContext(), "Ingresa la contraseña y correo", Toast.LENGTH_LONG).show();
+
         }else{
 
             obtenerSesion(email, password);
@@ -74,7 +78,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void registro(View view) {
-        Intent i = new Intent(this, Registro.class);
+        Intent i = new Intent(this, indexActivity.class);
         startActivity(i);
     }
 }

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/fondo"
+    android:background="@drawable/background"
     tools:context=".Registro"
     android:padding="15dp">
 
@@ -14,8 +15,10 @@
         android:id="@+id/imageViewLogo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="50"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        android:layout_weight="35"
+        android:layout_marginTop="25dp"
+        android:padding="@android:dimen/app_icon_size"
+        app:srcCompat="@drawable/clanc1" />
 
 
 
@@ -26,19 +29,22 @@
         android:layout_weight="9"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="@string/user"
+        android:hint="@string/nombre"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:drawableLeft="@drawable/icon_user"
+        android:drawableTint="@color/white"
         android:drawablePadding="10dp"
-        android:background="@drawable/edt_style"
+        app:backgroundTint="@color/underline"
         android:layout_marginBottom="15dp"
-        android:textColorHint="@color/black"
-        android:textColor="@color/black"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         />
 
 
     <EditText
+        android:drawableTint="@color/white"
+
         android:id="@+id/editTextUser"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -50,13 +56,15 @@
         android:layout_marginRight="15dp"
         android:drawableLeft="@drawable/icon_user"
         android:drawablePadding="10dp"
-        android:background="@drawable/edt_style"
+        app:backgroundTint="@color/underline"
         android:layout_marginBottom="15dp"
-        android:textColorHint="@color/black"
-        android:textColor="@color/black"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         />
 
     <EditText
+        android:drawableTint="@color/white"
+
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -68,30 +76,32 @@
         android:layout_marginRight="15dp"
         android:drawableLeft="@drawable/icon_password"
         android:drawablePadding="10dp"
-        android:background="@drawable/edt_style"
+        app:backgroundTint="@color/underline"
         android:layout_marginBottom="20dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
 
 
 
         />
     <EditText
+        android:drawableTint="@color/white"
+
         android:id="@+id/editTextPassword2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="9"
         android:ems="10"
         android:inputType="textPassword"
-        android:hint="@string/password"
+        android:hint="@string/password2"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:drawableLeft="@drawable/icon_password"
         android:drawablePadding="10dp"
-        android:background="@drawable/edt_style"
+        app:backgroundTint="@color/underline"
         android:layout_marginBottom="20dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
 
 
 
@@ -100,7 +110,7 @@
     <Button
         android:id="@+id/buttonRegistrarse"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="3dp"
         android:layout_weight="10"
         android:text="@string/registrarUsuario"
         android:layout_marginLeft="25dp"
@@ -115,8 +125,13 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/registrar"
-        android:gravity="center"/>
+        android:text="@string/loguearse"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:onClick="inicio"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -125,19 +140,19 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imageButtonFacebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            tools:srcCompat="@drawable/icon_facebook" />
+            android:src="@drawable/icon_facebook" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imageButtonWhats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            tools:srcCompat="@drawable/icon_whats" />
+            android:src="@drawable/icon_whats" />
     </LinearLayout>
 
 
