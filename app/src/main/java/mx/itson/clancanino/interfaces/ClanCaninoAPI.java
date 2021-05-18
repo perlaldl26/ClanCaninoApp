@@ -25,5 +25,8 @@ public interface ClanCaninoAPI {
     @GET("pets.php")
     Call<List<Mascotas>> obtenerMascotas();
 
+    @GET("pet.php")
+    Call<Mascotas> obtenerInfoMascota(@Query("id") int id);
+
 
 }

@@ -6,8 +6,13 @@ public class Mascotas {
 
     private int id;
     private String nombre;
+    private int idRefugio;
     private int edad;
+    private String sexo;
+    private String historia;
     private String foto;
+    private String estado;
+    private String observaciones;
     private String especie;
 
     Context context;
@@ -61,5 +66,43 @@ public class Mascotas {
         this.especie = especie;
     }
 
+    public int getIdRefugio() {
+        return idRefugio;
+    }
 
+    public void setIdRefugio(int idRefugio) {
+        this.idRefugio = idRefugio;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getHistoria() {
+        return historia;
+    }
+
+    public void setHistoria(String historia) {
+        this.historia = historia;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
 }

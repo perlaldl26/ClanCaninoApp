@@ -12,11 +12,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.List;
 
 public class IndexActivity extends AppCompatActivity {
@@ -59,6 +65,18 @@ public class IndexActivity extends AppCompatActivity {
                     MascotaAdapter adapter = new MascotaAdapter(context, mascotas);
 
                     listaMascotas.setAdapter(adapter);
+
+                    listaMascotas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            int idMasc = Integer.parseInt(((TextView) view.findViewById(R.id.txtId)).getText().toString());
+
+                            Intent i = new Intent(context, InfoMascota.class);
+                            i.putExtra("id", String.valueOf(idMasc));
+                            startActivity(i);
+                        }
+                    });
+
 
                 }
             }
