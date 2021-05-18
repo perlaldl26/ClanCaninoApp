@@ -98,6 +98,7 @@
         android:gravity="center">
 
         <ImageView
+            android:onClick="facebook"
             android:id="@+id/imageButtonFacebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -107,6 +108,7 @@
 
         <ImageView
             android:id="@+id/imageButtonWhats"
+            android:onClick="whatsapp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

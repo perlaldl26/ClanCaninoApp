@@ -142,6 +142,7 @@
 
         <ImageView
             android:id="@+id/imageButtonFacebook"
+            android:onClick="facebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -149,6 +150,7 @@
 
         <ImageView
             android:id="@+id/imageButtonWhats"
+            android:onClick="whatsapp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

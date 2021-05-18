@@ -3,8 +3,11 @@ package mx.itson.clancanino;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +29,10 @@ public class Login extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
+
+
     }
+
 
     public void obtenerSesion(String strEmail, String strPassword){
 
@@ -78,7 +84,20 @@ public class Login extends AppCompatActivity {
     }
 
     public void registro(View view) {
-        Intent i = new Intent(this, indexActivity.class);
+        Intent i = new Intent(this, IndexActivity.class);
         startActivity(i);
+    }
+
+
+    public void facebook(View view){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=https://www.facebook.com/clanclaninoguaymas/"));
+        startActivity(browserIntent);
+
+    }
+
+    public void whatsapp(View view) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/526221236966"));
+        startActivity(browserIntent);
+
     }
 }

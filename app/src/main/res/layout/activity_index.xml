@@ -5,11 +5,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".indexActivity">
+    tools:context=".IndexActivity"
+    android:orientation="vertical"
+    android:background="@drawable/background_index">
+
+    <androidx.appcompat.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:id="@+id/toolbar">
+    </androidx.appcompat.widget.Toolbar>
 
     <ListView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:divider="#59CCCCCC"
+        android:dividerHeight="1dp"
         android:id="@+id/listaMascotas"
         />
 

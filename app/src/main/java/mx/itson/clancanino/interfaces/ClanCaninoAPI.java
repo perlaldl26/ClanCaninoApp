@@ -1,5 +1,8 @@
 package mx.itson.clancanino.interfaces;
 
+import java.util.List;
+
+import mx.itson.clancanino.Entidades.Mascotas;
 import mx.itson.clancanino.Entidades.Sesion;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -18,4 +21,9 @@ public interface ClanCaninoAPI {
     @Multipart
     @POST("user-register.php")
     Call<Sesion> registrar(@Part("name") RequestBody name, @Part("email") RequestBody email, @Part("password") RequestBody  password);
+
+    @GET("pets.php")
+    Call<List<Mascotas>> obtenerMascotas();
+
+
 }
