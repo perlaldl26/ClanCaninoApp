@@ -10,7 +10,7 @@ public class RetrofitUtil {
 
     public static ClanCaninoAPI obtenerAPI(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://41a637373736.ngrok.io/apis/").addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("https://clancanino.000webhostapp.com/apis/").addConverterFactory(GsonConverterFactory.create())
 
                 .build();
         return retrofit.create(ClanCaninoAPI.class);

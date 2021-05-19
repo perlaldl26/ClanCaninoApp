@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import mx.itson.clancanino.Entidades.Mascotas;
-import mx.itson.clancanino.Entidades.Sesion;
 import mx.itson.clancanino.utilerias.RetrofitUtil;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,8 +47,35 @@ public class InfoMascota extends AppCompatActivity {
                     Mascotas mascota = response.body();
 
 
-                    TextView idMasc = (TextView) findViewById(R.id.idMascota);
-                    idMasc.setText(mascota.getNombre());
+                    TextView nombre = (TextView) findViewById(R.id.textNombre);
+                    nombre.setText(mascota.getNombre());
+
+                    TextView edad = (TextView) findViewById(R.id.textEdad);
+                    edad.setText(String.valueOf(mascota.getEdad())+ " años");
+
+                    TextView tipo = (TextView) findViewById(R.id.textTipo);
+                    tipo.setText(mascota.getEspecie());
+
+                    TextView sexo = (TextView) findViewById(R.id.textSexo);
+                    sexo.setText(mascota.getSexo());
+
+                    TextView historia = (TextView) findViewById(R.id.txtHistoria);
+                    historia.setText(mascota.getHistoria());
+
+                    TextView otro = (TextView) findViewById(R.id.txtOtros);
+                    otro.setText(mascota.getObservaciones());
+
+
+                    ImageView imageMascota = (ImageView) findViewById(R.id.imgMascota);
+                    String url = "https://clancanino.000webhostapp.com/" +mascota.getFoto();
+                    System.out.println(url);
+                    Glide.with(context)
+                            .load(url)
+                            .apply(new RequestOptions().override(1300,1800))
+                            .into(imageMascota);
+
+
+
 
 
 
@@ -59,5 +88,10 @@ public class InfoMascota extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void adoptar(View view) {
+        Intent i = new Intent(this, FormularioAdopcion.class);
+        startActivity(i);
     }
 }

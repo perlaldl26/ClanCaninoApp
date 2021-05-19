@@ -64,7 +64,7 @@ public class MascotaAdapter extends BaseAdapter {
 
 
         ImageView imageMascota = convertView.findViewById(R.id.imageMascota);
-        String url = "https://41a637373736.ngrok.io/" +mascota.getFoto();
+        String url = "https://clancanino.000webhostapp.com/" +mascota.getFoto();
         System.out.println(url);
         Glide.with(context)
                 .load(url)

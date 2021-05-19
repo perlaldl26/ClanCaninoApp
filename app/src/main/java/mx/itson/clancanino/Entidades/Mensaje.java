@@ -1,6 +1,6 @@
 package mx.itson.clancanino.Entidades;
 
-public class Sesion {
+public class Mensaje {
     private int success;
     private int status;
     private String message;

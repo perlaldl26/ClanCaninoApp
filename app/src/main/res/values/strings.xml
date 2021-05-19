@@ -8,4 +8,7 @@
     <string name="registrar">O registrar</string>
     <string name="loguearse">O inicia sesión</string>
     <string name="registrarUsuario">Registrarse</string>
+    <string name="btn_adop">Adoptar</string>
+    <string name="txtHistoria">Historia:</string>
+    <string name="txtObservaciones">Observaciones:</string>
 </resources>

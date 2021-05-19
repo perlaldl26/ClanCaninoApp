@@ -2,17 +2,17 @@ package mx.itson.clancanino;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
-import mx.itson.clancanino.Entidades.Sesion;
+
+import mx.itson.clancanino.Entidades.Mensaje;
 import mx.itson.clancanino.utilerias.RetrofitUtil;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -21,12 +21,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Login extends AppCompatActivity {
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        context=this;
 
 
 
@@ -40,16 +42,17 @@ public class Login extends AppCompatActivity {
 
         RequestBody password = RequestBody.create(MediaType.parse("text/plain"), strPassword);
 
-        Call<Sesion> llamada = RetrofitUtil.obtenerAPI().ingresar(email, password);
+        Call<Mensaje> llamada = RetrofitUtil.obtenerAPI().ingresar(email, password);
 
-        llamada.enqueue(new Callback<Sesion>() {
+        llamada.enqueue(new Callback<Mensaje>() {
             @Override
-            public void onResponse(Call<Sesion> call, Response<Sesion> response) {
+            public void onResponse(Call<Mensaje> call, Response<Mensaje> response) {
                 if(response.isSuccessful()){
-                    Sesion sesion = response.body();
+                    Mensaje sesion = response.body();
 
                     if(sesion.getSuccess() == 1){
-
+                        Intent i = new Intent(context, IndexActivity.class);
+                        startActivity(i);
                         Toast.makeText(getApplicationContext(), sesion.getMessage(), Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(getApplicationContext(),  sesion.getMessage(), Toast.LENGTH_LONG).show();
@@ -58,7 +61,7 @@ public class Login extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Sesion> call, Throwable t) {
+            public void onFailure(Call<Mensaje> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
@@ -84,7 +87,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void registro(View view) {
-        Intent i = new Intent(this, IndexActivity.class);
+        Intent i = new Intent(this, Registro.class);
         startActivity(i);
     }
 

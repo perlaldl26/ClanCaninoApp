@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import mx.itson.clancanino.Entidades.Sesion;
+import mx.itson.clancanino.Entidades.Mensaje;
 import mx.itson.clancanino.utilerias.RetrofitUtil;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -33,13 +33,13 @@ public class Registro extends AppCompatActivity {
 
         RequestBody password = RequestBody.create(MediaType.parse("text/plain"), strPassword);
 
-        Call<Sesion> llamada = RetrofitUtil.obtenerAPI().registrar(name, email, password);
+        Call<Mensaje> llamada = RetrofitUtil.obtenerAPI().registrar(name, email, password);
 
-        llamada.enqueue(new Callback<Sesion>() {
+        llamada.enqueue(new Callback<Mensaje>() {
             @Override
-            public void onResponse(Call<Sesion> call, Response<Sesion> response) {
+            public void onResponse(Call<Mensaje> call, Response<Mensaje> response) {
                 if (response.isSuccessful()) {
-                    Sesion sesion = response.body();
+                    Mensaje sesion = response.body();
 
                     if (sesion.getSuccess() == 1) {
 
@@ -51,7 +51,7 @@ public class Registro extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Sesion> call, Throwable t) {
+            public void onFailure(Call<Mensaje> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

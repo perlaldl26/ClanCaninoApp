@@ -4,15 +4,177 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InfoMascota">
+    android:orientation="vertical"
+    tools:context=".InfoMascota"
+
+    android:padding="15dp"
+    android:background="@color/white"
+
+    >
 
 
+    <ImageView
+        android:id="@+id/imgMascota"
 
-    <TextView
-        android:id="@+id/idMascota"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""/>
 
+        android:paddingBottom="10dp"
+        android:layout_marginTop="35dp"
+
+        />
+
+    <LinearLayout
+        android:background="@drawable/background"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+
+        >
+
+        <TextView
+            android:id="@+id/textNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="NombreMacota"
+            android:textColor="@color/white"
+            android:textSize="25sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textTipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/textEdad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="ofmwm"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/textSexo"
+                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+
+            android:layout_marginBottom="35dp">
+            <TextView
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+
+                android:text="@string/txtHistoria"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/txtHistoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:enabled="false"
+                android:textAlignment="center"
+                android:text="oeirgno woinf owinf woinf owif owif opsdponvo"
+                android:inputType="textMultiLine"
+                android:textColor="@color/white"
+                android:backgroundTint="@android:color/transparent"
+                android:textSize="18sp"></EditText>
+            <TextView
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="@string/txtObservaciones"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/txtOtros"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:enabled="false"
+                android:textAlignment="center"
+                android:text="oeirgno woinf owinf woinf owif owif opsdponvo"
+                android:inputType="textMultiLine"
+                android:textColor="@color/white"
+                android:backgroundTint="@android:color/transparent"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="25dp"
+            android:text="@string/btn_adop"
+            android:onClick="adoptar"
+            android:background="@drawable/btn_style"
+            android:textColor="@color/white"/>
+    </LinearLayout>
 
 </LinearLayout>
