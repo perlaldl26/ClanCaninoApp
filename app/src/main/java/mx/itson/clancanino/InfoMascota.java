@@ -1,10 +1,13 @@
 package mx.itson.clancanino;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +15,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import mx.itson.clancanino.Entidades.Mascotas;
 import mx.itson.clancanino.utilerias.RetrofitUtil;
 import retrofit2.Call;
@@ -20,6 +25,7 @@ import retrofit2.Response;
 
 public class InfoMascota extends AppCompatActivity {
 
+    int idMascota;
     Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +33,17 @@ public class InfoMascota extends AppCompatActivity {
         setContentView(R.layout.activity_info_mascota);
 
         context = this;
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
         Intent intent = getIntent();
         if(intent.getStringExtra("id") != null) {
-            int id = Integer.parseInt(intent.getStringExtra("id"));
-            obtenerInfo(id);
+            idMascota = Integer.parseInt(intent.getStringExtra("id"));
+            obtenerInfo(idMascota);
         }
     }
 
@@ -91,7 +104,35 @@ public class InfoMascota extends AppCompatActivity {
     }
 
     public void adoptar(View view) {
-        Intent i = new Intent(this, FormularioAdopcion.class);
+        Intent i = new Intent(context, FormularioAdopcion.class);
+        i.putExtra("idMascota", String.valueOf(idMascota));
         startActivity(i);
+
+
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.searh_icon);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //arrayAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 }

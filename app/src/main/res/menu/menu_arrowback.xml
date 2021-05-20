@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context="com.me.myapp.activities.Timer">
+    <item
+        android:id="@+id/backArrow"
+        android:title="Back Button"
+        android:icon="@drawable/ic_baseline_arrow_back_24"
+        app:showAsAction="ifRoom"></item>
+</menu>
