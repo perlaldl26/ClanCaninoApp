@@ -1,14 +1,33 @@
 package mx.itson.clancanino.Entidades;
 
+import com.google.gson.annotations.SerializedName;
+
 public class UsuarioInfo {
 
+    @SerializedName("success")
+    private int success;
+
+    @SerializedName("idUsuario")
     private int idUsuario;
+
+    @SerializedName("edad")
     private int edad;
+
+    @SerializedName("direccion")
     private String direccion;
+
+    @SerializedName("numMascotas")
     private int numeroMascotas;
+
+    @SerializedName("telefono")
     private String telefono;
+
+    @SerializedName("cedula")
     private String cedula;
+
+    @SerializedName("celula")
     private String celular;
+
 
     public int getIdUsuario() {
         return idUsuario;
@@ -64,5 +83,13 @@ public class UsuarioInfo {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public int getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(int success) {
+        this.success = success;
     }
 }

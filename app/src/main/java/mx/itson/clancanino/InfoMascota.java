@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -90,6 +91,8 @@ public class InfoMascota extends AppCompatActivity {
 
 
 
+                    Button btnAdopt = (Button) findViewById(R.id.btnAdopt);
+                    btnAdopt.setVisibility(View.VISIBLE);
 
 
 
