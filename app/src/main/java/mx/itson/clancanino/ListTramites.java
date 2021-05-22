@@ -50,7 +50,7 @@ public class ListTramites extends AppCompatActivity {
         setContentView(R.layout.activity_list_tramites);
 
 
-        Toolbar mToolBar = findViewById(R.id.toolbar);
+        Toolbar mToolBar = (Toolbar)findViewById(R.id.toolbar);
         mToolBar.setTitle("Mis tramites ");
 
         mToolBar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
@@ -65,12 +65,7 @@ public class ListTramites extends AppCompatActivity {
             idUsuario = prefs.getInt("idUser", 0);}
 
         context = this;
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayShowTitleEnabled(false);
-        }
+        
 
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -82,7 +77,7 @@ public class ListTramites extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        bottomNavigationView.setSelectedItemId(R.id.nav_tramite);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
