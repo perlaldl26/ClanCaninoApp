@@ -32,7 +32,15 @@ public class Login extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         context=this;
 
+        SharedPreferences prefs = getSharedPreferences("Sesion", MODE_PRIVATE);
+        if (prefs.getAll() != null) {
+            String name = prefs.getString("name", "No name defined");
+            if(!name.equals("No name defined")){
+                startActivity(new Intent(getApplicationContext(), IndexActivity.class));
+                overridePendingTransition(2, 2);
+            }
 
+        }
 
 
     }
