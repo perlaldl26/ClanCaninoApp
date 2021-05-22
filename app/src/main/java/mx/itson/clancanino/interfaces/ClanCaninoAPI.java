@@ -5,6 +5,7 @@ import java.util.List;
 import mx.itson.clancanino.Entidades.Mascotas;
 import mx.itson.clancanino.Entidades.Mensaje;
 import mx.itson.clancanino.Entidades.Sesion;
+import mx.itson.clancanino.Entidades.Tramite;
 import mx.itson.clancanino.Entidades.UsuarioInfo;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -37,5 +38,6 @@ public interface ClanCaninoAPI {
     @POST("user-info.php")
     Call<Mensaje> ingresarInfoPersonal(@Part("idUsuario") RequestBody idUsuario, @Part("idMascota") RequestBody idMascota, @Part("edad") RequestBody edad, @Part("direccion") RequestBody direccion, @Part("numeroMascotas") RequestBody numeroMascotas, @Part("telefono") RequestBody  telefono, @Part("cedula") RequestBody  cedula, @Part("celular") RequestBody  celular);
 
-
+    @GET("getTramite.php")
+    Call<List<Tramite>> obtenerTramites(@Query("idUsuario") int id);
 }

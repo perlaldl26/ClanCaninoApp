@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".FormularioAdopcion"></activity>
+        <activity android:name=".ListTramites"></activity>
+        <activity android:name=".FormularioAdopcion" />
         <activity android:name=".InfoMascota" />
         <activity android:name=".IndexActivity" />
         <activity android:name=".Registro" />
