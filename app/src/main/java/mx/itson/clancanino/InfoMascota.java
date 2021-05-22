@@ -1,10 +1,15 @@
 package mx.itson.clancanino;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,9 +17,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -34,18 +41,79 @@ public class InfoMascota extends AppCompatActivity {
         setContentView(R.layout.activity_info_mascota);
 
         context = this;
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
 
-        if (actionBar != null) {
-            actionBar.setDisplayShowTitleEnabled(false);
-        }
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Información de mascota");
+
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+
+        setSupportActionBar(toolbar);
+
+
+
         Intent intent = getIntent();
         if(intent.getStringExtra("id") != null) {
             idMascota = Integer.parseInt(intent.getStringExtra("id"));
             obtenerInfo(idMascota);
         }
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        startActivity(new Intent(getApplicationContext(), IndexActivity.class));
+                        overridePendingTransition(2, 2);
+                        return true;
+                    case R.id.nav_tramite:
+                        startActivity(new Intent(getApplicationContext(), FormularioAdopcion.class));
+                        overridePendingTransition(2, 2);
+                        return true;
+                    case R.id.nav_log_out:
+
+                        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                        alert.setTitle("Cerrar sesión");
+                        alert.setMessage("¿Seguro desea Cerrar la sesión actual?");
+
+                        alert.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(getApplicationContext(), Login.class));
+                                overridePendingTransition(2, 2);
+                                SharedPreferences.Editor editor = getSharedPreferences("Sesion", MODE_PRIVATE).edit();
+                                editor.clear();
+                                editor.apply();
+
+                                Toast.makeText(context, "Se cerró la sesión correctamente: " , Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+                        alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+
+                            }
+                        });
+
+                        alert.show();
+                        return true;
+
+
+                }
+
+                return false;
+            }
+        });
+
     }
 
     public void obtenerInfo(int id){
@@ -118,24 +186,19 @@ public class InfoMascota extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        MenuItem menuItem = menu.findItem(R.id.searh_icon);
-        SearchView searchView = (SearchView) menuItem.getActionView();
+        return true;
+    }
 
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                //arrayAdapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-
-        return super.onCreateOptionsMenu(menu);
     }
 }

@@ -44,9 +44,9 @@ public class FormularioAdopcion extends AppCompatActivity {
             idMascota = Integer.parseInt(intent.getStringExtra("idMascota"));
             
         }
-
-
         setContentView(R.layout.activity_formulario_adopcion);
+
+
         Toolbar mToolBar = findViewById(R.id.toolbar);
         mToolBar.setTitle("Registro para adopción ");
 

@@ -1,6 +1,8 @@
 package mx.itson.clancanino;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -11,8 +13,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,11 +30,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class IndexActivity extends AppCompatActivity {
     Context context;
     ListView listaMascotas;
+    ListView listaMascotasSearch;
+
+    List<Mascotas> mascotas = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +53,60 @@ public class IndexActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(false);
         }
+
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        return true;
+                    case R.id.nav_tramite:
+                        startActivity(new Intent(getApplicationContext(), FormularioAdopcion.class));
+                        overridePendingTransition(2, 2);
+                        return true;
+                    case R.id.nav_log_out:
+
+                        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                        alert.setTitle("Cerrar sesión");
+                        alert.setMessage("¿Seguro desea Cerrar la sesión actual?");
+
+                        alert.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(getApplicationContext(), Login.class));
+                                overridePendingTransition(2, 2);
+                                SharedPreferences.Editor editor = getSharedPreferences("Sesion", MODE_PRIVATE).edit();
+                                editor.clear();
+                                editor.apply();
+
+                                Toast.makeText(context, "Se cerró la sesión correctamente: " , Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+                        alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+
+                            }
+                        });
+
+                        alert.show();
+                        return true;
+
+
+                }
+
+                return false;
+            }
+        });
 
 
     }
@@ -60,7 +125,7 @@ public class IndexActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Mascotas>> call, Response<List<Mascotas>> response) {
                 if (response.isSuccessful()) {
-                    List<Mascotas> mascotas = response.body();
+                    mascotas = response.body();
 
                     listaMascotas = findViewById(R.id.listaMascotas);
                     MascotaAdapter adapter = new MascotaAdapter(context, mascotas);
@@ -106,13 +171,48 @@ public class IndexActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+
+                if(query == null){
+                    MascotaAdapter adapter = new MascotaAdapter(context, mascotas);
+                    listaMascotas.setAdapter(adapter);
+                }else{
+
+                List<Mascotas> searchmascotas = new ArrayList<>();
+                listaMascotasSearch = findViewById(R.id.listaMascotas);
+
+
+
+                mascotas.stream()
+                        .filter(m -> ((m.getNombre().toUpperCase().contains(query.toUpperCase()))  || (m.getEspecie().toUpperCase().contains(query.toUpperCase()))))
+                        .forEach(searchmascotas::add);
+
+                MascotaAdapter adapter = new MascotaAdapter(context, searchmascotas);
+                listaMascotas.setAdapter(adapter);
+                }
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //arrayAdapter.getFilter().filter(newText);
-                return false;
+                if(newText == null){
+                    MascotaAdapter adapter = new MascotaAdapter(context, mascotas);
+                    listaMascotas.setAdapter(adapter);
+                }else {
+
+
+                    List<Mascotas> searchmascotas = new ArrayList<>();
+                    listaMascotasSearch = findViewById(R.id.listaMascotas);
+
+
+                    mascotas.stream()
+                            .filter(m -> ((m.getNombre().toUpperCase().contains(newText.toUpperCase())) || (m.getEspecie().toUpperCase().contains(newText.toUpperCase()))))
+                            .forEach(searchmascotas::add);
+
+                    MascotaAdapter adapter = new MascotaAdapter(context, searchmascotas);
+                    listaMascotas.setAdapter(adapter);
+                }
+
+                return true;
             }
         });
 
