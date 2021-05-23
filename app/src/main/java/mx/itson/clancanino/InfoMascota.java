@@ -72,7 +72,7 @@ public class InfoMascota extends AppCompatActivity {
                         overridePendingTransition(2, 2);
                         return true;
                     case R.id.nav_tramite:
-                        startActivity(new Intent(getApplicationContext(), FormularioAdopcion.class));
+                        startActivity(new Intent(getApplicationContext(), ListTramites.class));
                         overridePendingTransition(2, 2);
                         return true;
                     case R.id.nav_log_out:

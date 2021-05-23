@@ -14,6 +14,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,10 +29,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mx.itson.clancanino.Entidades.Mascotas;
+import mx.itson.clancanino.Entidades.Mensaje;
 import mx.itson.clancanino.Entidades.Tramite;
 import mx.itson.clancanino.adapters.MascotaAdapter;
 import mx.itson.clancanino.adapters.TramiteAdapter;
 import mx.itson.clancanino.utilerias.RetrofitUtil;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,7 +55,7 @@ public class ListTramites extends AppCompatActivity {
         setContentView(R.layout.activity_list_tramites);
 
 
-        Toolbar mToolBar = findViewById(R.id.toolbar);
+        Toolbar mToolBar = (Toolbar)findViewById(R.id.toolbar);
         mToolBar.setTitle("Mis tramites ");
 
         mToolBar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
@@ -65,12 +70,7 @@ public class ListTramites extends AppCompatActivity {
             idUsuario = prefs.getInt("idUser", 0);}
 
         context = this;
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayShowTitleEnabled(false);
-        }
+        
 
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -82,7 +82,7 @@ public class ListTramites extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        bottomNavigationView.setSelectedItemId(R.id.nav_tramite);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
@@ -157,6 +157,16 @@ public class ListTramites extends AppCompatActivity {
                         TramiteAdapter adapter = new TramiteAdapter(context, tramites);
 
                         listaTramites.setAdapter(adapter);
+                        registerForContextMenu(listaTramites);
+
+                        listaTramites.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                int idTramite = Integer.parseInt(((TextView) view.findViewById(R.id.txtId)).getText().toString());
+
+                                Toast.makeText(context, String.valueOf(idTramite), Toast.LENGTH_LONG).show();
+                            }
+                        });
 
 
 
@@ -174,6 +184,88 @@ public class ListTramites extends AppCompatActivity {
 
             Log.e("Error al cargar lista", ex.getMessage());
         }
+
+    }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo contextMenuInfo){
+        super.onCreateContextMenu(menu, view,contextMenuInfo);
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_tramite, menu);
+    }
+
+
+
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item){
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Tramite tramite = (Tramite) listaTramites.getItemAtPosition(info.position);
+
+        if(item.getItemId() == R.id.eliminar){
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage("¿Deseas eliminar el registro?");
+            builder.setTitle("Deseas eliminar");
+            builder.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String idTramite = String.valueOf(tramite.getId());
+                    String estado = tramite.getEstado();
+                    if(estado != "aceptado"){
+                        eliminarTramite(idTramite, estado);
+
+                    }else{
+                        Toast.makeText(context, "Un tramite ya aceptado no puede ser eliminado" , Toast.LENGTH_LONG).show();
+                    }
+
+
+                }
+            });
+            builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+
+        }
+
+        return true;
+
+    }
+    public void eliminarTramite(String id,  String estado) {
+
+        RequestBody idTramite = RequestBody.create(MediaType.parse("text/plain"), id);
+
+        RequestBody estadoTram = RequestBody.create(MediaType.parse("text/plain"), estado);
+
+        Call<Mensaje> llamada = RetrofitUtil.obtenerAPI().eliminarTramite(idTramite, estadoTram);
+
+        llamada.enqueue(new Callback<Mensaje>() {
+            @Override
+            public void onResponse(Call<Mensaje> call, Response<Mensaje> response) {
+                if (response.isSuccessful()) {
+                    Mensaje sesion = response.body();
+
+                    if (sesion.getSuccess() == 1) {
+
+                        Toast.makeText(getApplicationContext(), sesion.getMessage(), Toast.LENGTH_LONG).show();
+                        
+                        onResume();
+                    } else {
+                        Toast.makeText(getApplicationContext(), sesion.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Mensaje> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 

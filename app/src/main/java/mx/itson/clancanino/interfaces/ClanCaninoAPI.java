@@ -38,6 +38,10 @@ public interface ClanCaninoAPI {
     @POST("user-info.php")
     Call<Mensaje> ingresarInfoPersonal(@Part("idUsuario") RequestBody idUsuario, @Part("idMascota") RequestBody idMascota, @Part("edad") RequestBody edad, @Part("direccion") RequestBody direccion, @Part("numeroMascotas") RequestBody numeroMascotas, @Part("telefono") RequestBody  telefono, @Part("cedula") RequestBody  cedula, @Part("celular") RequestBody  celular);
 
+    @Multipart
+    @POST("deleteTramite.php")
+    Call<Mensaje> eliminarTramite(@Part("idTramite") RequestBody id, @Part("estado") RequestBody  estado);
+
     @GET("getTramite.php")
     Call<List<Tramite>> obtenerTramites(@Query("idUsuario") int id);
 }
