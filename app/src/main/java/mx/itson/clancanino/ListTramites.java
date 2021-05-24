@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -132,6 +133,8 @@ public class ListTramites extends AppCompatActivity {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+                                bottomNavigationView.setSelectedItemId(R.id.nav_tramite);
                                 dialog.dismiss();
 
                             }
@@ -154,6 +157,22 @@ public class ListTramites extends AppCompatActivity {
         super.onResume();
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+                bottomNavigationView.setSelectedItemId(R.id.nav_home);
+                finish();
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
     public void cargarLista(){
         try{
             Call<List<Tramite>> llamada = RetrofitUtil.obtenerAPI().obtenerTramites(idUsuario);
@@ -170,14 +189,7 @@ public class ListTramites extends AppCompatActivity {
                         listaTramites.setAdapter(adapter);
                         registerForContextMenu(listaTramites);
 
-                        listaTramites.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                int idTramite = Integer.parseInt(((TextView) view.findViewById(R.id.txtId)).getText().toString());
 
-                                Toast.makeText(context, String.valueOf(idTramite), Toast.LENGTH_LONG).show();
-                            }
-                        });
 
                         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.pullRefresh);
                         swipeRefreshLayout.setRefreshing(false);
@@ -280,6 +292,8 @@ public class ListTramites extends AppCompatActivity {
         });
 
     }
+
+
 
 
 

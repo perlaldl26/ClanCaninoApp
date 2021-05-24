@@ -99,6 +99,8 @@ public class InfoMascota extends AppCompatActivity {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+                                bottomNavigationView.setSelectedItemId(R.id.nav_home);
                                 dialog.dismiss();
 
                             }

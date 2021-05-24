@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:minHeight="250sp"
+    android:id="@+id/item_tramitejaja"
     >
 
     <ImageView
