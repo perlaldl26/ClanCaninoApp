@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,7 +73,10 @@ public class Login extends AppCompatActivity {
                         startActivity(i);
                         Toast.makeText(getApplicationContext(), sesion.getMessage(), Toast.LENGTH_LONG).show();
                     }else{
+
                         Toast.makeText(getApplicationContext(),  sesion.getMessage(), Toast.LENGTH_LONG).show();
+                        Button boton = (Button) findViewById(R.id.buttonIngresar);
+                        boton.setEnabled(true);
                     }
                 }
             }
@@ -96,8 +100,11 @@ public class Login extends AppCompatActivity {
         if(email.equals("") || password.equals("")){
 
         }else{
-
+            Button boton = (Button) findViewById(R.id.buttonIngresar);
+            boton.setEnabled(false);
             obtenerSesion(email, password);
+
+
         }
 
 

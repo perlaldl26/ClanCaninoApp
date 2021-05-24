@@ -1,5 +1,6 @@
 package mx.itson.clancanino.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,6 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
-import mx.itson.clancanino.Entidades.Mascotas;
 import mx.itson.clancanino.Entidades.Tramite;
 import mx.itson.clancanino.R;
 
@@ -42,6 +42,7 @@ public class TramiteAdapter extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint({"ResourceAsColor", "UseCompatLoadingForDrawables"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -56,13 +57,30 @@ public class TramiteAdapter extends BaseAdapter {
         txtNombre.setText(tramite.getNombreMascota());
 
         TextView txtEdad = convertView.findViewById(R.id.txtEdad);
-        txtEdad.setText(String.valueOf("Edad: "+tramite.getEdad()));
+        txtEdad.setText(String.valueOf("Edad: "+tramite.getEdad() + " años"));
+        if (tramite.getEdad() == 0){
+
+            txtEdad.setText(String.valueOf("Edad: cachorro"));
+
+        }
 
         TextView txtTipo = convertView.findViewById(R.id.txtTipo);
         txtTipo.setText("Raza: "+tramite.getEspecie());
 
         TextView txtEstado = convertView.findViewById(R.id.txtEstado);
         txtEstado.setText("Estado: "+tramite.getEstado());
+        switch (tramite.getEstado()){
+            case "procesando":
+                txtEstado.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.pros_style) );
+                break;
+            case "cancelado":
+                txtEstado.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.canc_style) );
+                break;
+            case "aceptado":
+                txtEstado.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.btn_style) );
+                break;
+        }
+
 
         TextView txtFecha = convertView.findViewById(R.id.txtFecha);
         txtFecha.setText("Fecha: "+tramite.getFecha());

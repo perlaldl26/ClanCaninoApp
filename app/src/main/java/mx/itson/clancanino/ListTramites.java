@@ -28,6 +28,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import mx.itson.clancanino.Entidades.Mascotas;
 import mx.itson.clancanino.Entidades.Mensaje;
 import mx.itson.clancanino.Entidades.Tramite;
@@ -55,8 +56,19 @@ public class ListTramites extends AppCompatActivity {
         setContentView(R.layout.activity_list_tramites);
 
 
+
+        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.pullRefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                cargarLista();
+
+            }
+        });
+
+
         Toolbar mToolBar = (Toolbar)findViewById(R.id.toolbar);
-        mToolBar.setTitle("Mis tramites ");
+        mToolBar.setTitle("Mis trámites ");
 
         mToolBar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
 
@@ -70,8 +82,8 @@ public class ListTramites extends AppCompatActivity {
             idUsuario = prefs.getInt("idUser", 0);}
 
         context = this;
-        
 
+        cargarLista();
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -139,7 +151,6 @@ public class ListTramites extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        cargarLista();
         super.onResume();
     }
 
@@ -168,7 +179,8 @@ public class ListTramites extends AppCompatActivity {
                             }
                         });
 
-
+                        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.pullRefresh);
+                        swipeRefreshLayout.setRefreshing(false);
 
 
                     }

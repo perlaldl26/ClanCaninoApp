@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -91,6 +92,10 @@ public class FormularioAdopcion extends AppCompatActivity {
                             EditText txtDireccion = (EditText) findViewById(R.id.editDirección);
                             txtDireccion.setText(userInfo.getDireccion());
 
+                            Button boton = (Button) findViewById(R.id.buttonIngresar);
+                            boton.setVisibility(View.VISIBLE);
+
+
                         }
 
                     }
@@ -130,6 +135,8 @@ public class FormularioAdopcion extends AppCompatActivity {
 }
 
     public void registrar(View view) {
+        Button boton = (Button) findViewById(R.id.buttonIngresar);
+        boton.setEnabled(false);
 
         EditText txtEdad = (EditText) findViewById(R.id.editEdad);
         String edad = txtEdad.getText().toString().trim();
@@ -189,8 +196,12 @@ public class FormularioAdopcion extends AppCompatActivity {
                     if (sesion.getSuccess() == 1) {
 
                         Toast.makeText(getApplicationContext(), sesion.getMessage(), Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(getApplicationContext(), ListTramites.class));
+                        overridePendingTransition(2, 2);
                     } else {
                         Toast.makeText(getApplicationContext(), sesion.getMessage(), Toast.LENGTH_LONG).show();
+                        Button boton = (Button) findViewById(R.id.buttonIngresar);
+                        boton.setEnabled(true);
                     }
                 }
             }

@@ -8,7 +8,7 @@
         <item
             android:id="@+id/nav_tramite"
             android:icon="@drawable/ic_baseline_assignment_24"
-            android:title="Mis tramites"/>
+            android:title="Mis trámites"/>
 
         <item
             android:id="@+id/nav_log_out"

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import mx.itson.clancanino.Entidades.Mascotas;
 import mx.itson.clancanino.adapters.MascotaAdapter;
 import mx.itson.clancanino.utilerias.RetrofitUtil;
@@ -47,6 +48,8 @@ public class IndexActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
+
+        cargarLista();
         context = this;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,6 +57,16 @@ public class IndexActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(false);
         }
+
+        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.pullRefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                cargarLista();
+
+            }
+        });
+
 
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -122,7 +135,7 @@ public class IndexActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        cargarLista();
+
         super.onResume();
     }
 
@@ -152,7 +165,8 @@ public class IndexActivity extends AppCompatActivity {
                         }
                     });
 
-
+                    SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.pullRefresh);
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
 
@@ -227,6 +241,8 @@ public class IndexActivity extends AppCompatActivity {
 
     return super.onCreateOptionsMenu(menu);
     }
+
+
 
 
 

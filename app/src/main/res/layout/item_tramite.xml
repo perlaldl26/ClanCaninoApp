@@ -17,7 +17,7 @@
         />
 
     <LinearLayout
-        android:paddingVertical="20sp"
+        android:paddingVertical="10sp"
         android:layout_marginLeft="-30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,6 +31,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/txtEstado"
+            android:text="Estado tramite"
+            android:padding="10sp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginTop="30sp"/>
 
         <TextView
             android:id="@+id/txtNombreMascota"
@@ -58,14 +68,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:layout_marginTop="30sp"/>
-        <TextView
-            android:id="@+id/txtEstado"
-            android:text="Estado tramite"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_marginTop="30sp"/>
+
         <TextView
             android:id="@+id/txtFecha"
             android:text=""
