@@ -32,51 +32,8 @@ public class Registro extends AppCompatActivity {
     }
 
 
-    public void obtenerSesion(String strEmail, String strPassword){
 
-        RequestBody email = RequestBody.create(MediaType.parse("text/plain"), strEmail);
-
-        RequestBody password = RequestBody.create(MediaType.parse("text/plain"), strPassword);
-
-        Call<Sesion> llamada = RetrofitUtil.obtenerAPI().ingresar(email, password);
-
-        llamada.enqueue(new Callback<Sesion>() {
-            @Override
-            public void onResponse(Call<Sesion> call, Response<Sesion> response) {
-                if(response.isSuccessful()){
-                    Sesion sesion = response.body();
-
-                    if(sesion.getSuccess() == 1){
-                        SharedPreferences.Editor editor = getSharedPreferences("Sesion", MODE_PRIVATE).edit();
-                        editor.putInt("idUser", sesion.getIdUsuario());
-                        editor.putString("userRol", sesion.getRol());
-                        editor.putString("name", sesion.getNombre());
-                        editor.putString("email", sesion.getCorreo());
-                        editor.commit();
-
-                        Intent i = new Intent(context, IndexActivity.class);
-                        startActivity(i);
-                        Toast.makeText(getApplicationContext(), sesion.getMessage(), Toast.LENGTH_LONG).show();
-                    }else{
-
-                        Toast.makeText(getApplicationContext(),  sesion.getMessage(), Toast.LENGTH_LONG).show();
-                        Button boton = (Button) findViewById(R.id.buttonIngresar);
-                        boton.setEnabled(true);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Sesion> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-
-
-
-
+    
 
 
     public void mandarRegistro(String strEmail, String strPassword, String strName) {
