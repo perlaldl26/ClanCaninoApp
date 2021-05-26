@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,10 +30,10 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         context=this;
-
+        setContentView(R.layout.activity_login);
         SharedPreferences prefs = getSharedPreferences("Sesion", MODE_PRIVATE);
         if (prefs.getAll() != null) {
             String name = prefs.getString("name", "No name defined");
@@ -40,6 +41,13 @@ public class Login extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), IndexActivity.class));
                 overridePendingTransition(2, 2);
             }
+
+        }
+        Intent intent = getIntent();
+        if(intent.getStringExtra("correo") != null && intent.getStringExtra("contrasena") != null) {
+            EditText txtCorreo =  (EditText) findViewById(R.id.editTextUser);
+            txtCorreo.setText(String.valueOf(intent.getStringExtra("correo")));
+            obtenerSesion(intent.getStringExtra("correo"), intent.getStringExtra("contrasena"));
 
         }
 
@@ -60,7 +68,7 @@ public class Login extends AppCompatActivity {
             public void onResponse(Call<Sesion> call, Response<Sesion> response) {
                 if(response.isSuccessful()){
                     Sesion sesion = response.body();
-
+                    if(sesion.getCuentaActiva() == 1){
                     if(sesion.getSuccess() == 1){
                         SharedPreferences.Editor editor = getSharedPreferences("Sesion", MODE_PRIVATE).edit();
                         editor.putInt("idUser", sesion.getIdUsuario());
@@ -71,10 +79,15 @@ public class Login extends AppCompatActivity {
 
                         Intent i = new Intent(context, IndexActivity.class);
                         startActivity(i);
-                        Toast.makeText(getApplicationContext(), sesion.getMessage(), Toast.LENGTH_LONG).show();
+
                     }else{
 
                         Toast.makeText(getApplicationContext(),  sesion.getMessage(), Toast.LENGTH_LONG).show();
+                        Button boton = (Button) findViewById(R.id.buttonIngresar);
+                        boton.setEnabled(true);
+                    }} else{
+
+                        Toast.makeText(getApplicationContext(),  "Debes activar tu cuenta, se te mandó un correo", Toast.LENGTH_LONG).show();
                         Button boton = (Button) findViewById(R.id.buttonIngresar);
                         boton.setEnabled(true);
                     }

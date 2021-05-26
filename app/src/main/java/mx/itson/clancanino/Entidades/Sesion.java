@@ -9,7 +9,23 @@ public class Sesion {
     private String nombre;
     private String rol;
     private String correo;
+    private int cuentaActiva;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getCuentaActiva() {
+        return cuentaActiva;
+    }
+
+    public void setCuentaActiva(int cuentaActiva) {
+        this.cuentaActiva = cuentaActiva;
+    }
 
     public int getSuccess() {
         return success;
@@ -67,4 +83,11 @@ public class Sesion {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+
+
+
+
+
+
+
 }

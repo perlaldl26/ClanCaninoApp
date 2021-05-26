@@ -98,6 +98,10 @@ public class FormularioAdopcion extends AppCompatActivity {
 
                         }
 
+                        Button boton = (Button) findViewById(R.id.buttonIngresar);
+                        boton.setVisibility(View.VISIBLE);
+                        boton.setEnabled(true);
+
                     }
                 }
 
@@ -118,7 +122,9 @@ public class FormularioAdopcion extends AppCompatActivity {
             txtEmail.setInputType(InputType.TYPE_NULL);
 
         }
-
+        Button boton = (Button) findViewById(R.id.buttonIngresar);
+        boton.setVisibility(View.VISIBLE);
+        boton.setEnabled(true);
 
     }
 
