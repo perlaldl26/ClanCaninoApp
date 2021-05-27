@@ -59,6 +59,24 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:layout_marginTop="30sp"/>
+        <TextView
+            android:id="@+id/buttonIngresar"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+
+            android:text="@string/adopt"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp"
+            android:textAlignment="center"
+
+            android:textSize="20sp"
+            android:textAllCaps="false"
+            android:background="@drawable/btn_style2"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            />
+
 
     </LinearLayout>
 

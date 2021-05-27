@@ -12,4 +12,5 @@
     <string name="txtHistoria">Historia:</string>
     <string name="txtObservaciones">Observaciones:</string>
     <string name="menu_eliminar">Eliminar</string>
+    <string name="adopt">Adoptar</string>
 </resources>

@@ -33,7 +33,7 @@ public class Registro extends AppCompatActivity {
 
 
 
-    
+
 
 
     public void mandarRegistro(String strEmail, String strPassword, String strName) {

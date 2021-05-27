@@ -54,13 +54,16 @@ public class MascotaAdapter extends BaseAdapter {
         txtId.setText(String.valueOf(mascota.getId()));
 
         TextView txtNombre = convertView.findViewById(R.id.txtNombre);
-        txtNombre.setText(mascota.getNombre());
+        txtNombre.setText("Mascota: "+mascota.getNombre() );
 
         TextView txtEdad = convertView.findViewById(R.id.txtEdad);
-        txtEdad.setText(String.valueOf("Edad: "+mascota.getEdad()));
+        txtEdad.setText(String.valueOf("Edad: "+mascota.getEdad() +" año(s)"));
+        if(mascota.getEdad() < 1){
+            txtEdad.setText(String.valueOf("cachorro"));
+        }
 
         TextView txtTipo = convertView.findViewById(R.id.txtTipo);
-        txtTipo.setText("Raza: "+mascota.getEspecie());
+        txtTipo.setText("Tipo: "+mascota.getEspecie());
 
 
         ImageView imageMascota = convertView.findViewById(R.id.imageMascota);

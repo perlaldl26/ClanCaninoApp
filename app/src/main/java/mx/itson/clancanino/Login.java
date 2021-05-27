@@ -68,8 +68,9 @@ public class Login extends AppCompatActivity {
             public void onResponse(Call<Sesion> call, Response<Sesion> response) {
                 if(response.isSuccessful()){
                     Sesion sesion = response.body();
-                    if(sesion.getCuentaActiva() == 1){
+
                     if(sesion.getSuccess() == 1){
+                        if(sesion.getCuentaActiva() == 1){
                         SharedPreferences.Editor editor = getSharedPreferences("Sesion", MODE_PRIVATE).edit();
                         editor.putInt("idUser", sesion.getIdUsuario());
                         editor.putString("userRol", sesion.getRol());
@@ -82,12 +83,12 @@ public class Login extends AppCompatActivity {
 
                     }else{
 
-                        Toast.makeText(getApplicationContext(),  sesion.getMessage(), Toast.LENGTH_LONG).show();
-                        Button boton = (Button) findViewById(R.id.buttonIngresar);
-                        boton.setEnabled(true);
-                    }} else{
+                            Toast.makeText(getApplicationContext(),  "Debes activar tu cuenta, se te mandó un correo electrónico", Toast.LENGTH_LONG).show();
+                            Button boton = (Button) findViewById(R.id.buttonIngresar);
+                            boton.setEnabled(true);
+                        }}else{
 
-                        Toast.makeText(getApplicationContext(),  "Debes activar tu cuenta, se te mandó un correo", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),  sesion.getMessage(), Toast.LENGTH_LONG).show();
                         Button boton = (Button) findViewById(R.id.buttonIngresar);
                         boton.setEnabled(true);
                     }
