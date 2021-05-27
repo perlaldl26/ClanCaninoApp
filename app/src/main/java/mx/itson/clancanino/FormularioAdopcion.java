@@ -165,6 +165,7 @@ public class FormularioAdopcion extends AppCompatActivity {
 
         if (numMasc.trim().equals("") || cedula.trim().equals("") || celular.trim().equals("") || telefono.trim().equals("") || direccion.trim().equals("") || edad.trim().equals("")) {
             Toast.makeText(getApplicationContext(), "No se han llenado todos los datos", Toast.LENGTH_LONG).show();
+            boton.setEnabled(true);
         } else {
 
             mandarTramite(idUsuario, idMascota, edad, numMasc, cedula, celular, telefono, direccion);
