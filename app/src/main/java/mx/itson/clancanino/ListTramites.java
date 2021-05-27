@@ -278,7 +278,7 @@ public class ListTramites extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(), sesion.getMessage(), Toast.LENGTH_LONG).show();
                         
-                        onResume();
+                        cargarLista();
                     } else {
                         Toast.makeText(getApplicationContext(), sesion.getMessage(), Toast.LENGTH_LONG).show();
                     }
