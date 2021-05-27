@@ -44,6 +44,7 @@ public class IndexActivity extends AppCompatActivity {
 
     List<Mascotas> mascotas = new ArrayList<>();
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,10 @@ public class IndexActivity extends AppCompatActivity {
         cargarLista();
         context = this;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
+
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(false);
@@ -191,6 +195,9 @@ public class IndexActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         MenuItem menuItem = menu.findItem(R.id.searh_icon);
         SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Buscar mascota");
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            toolbar.setTitle("Mascotas en adopción");
 
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
